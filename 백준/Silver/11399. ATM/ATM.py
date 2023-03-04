@@ -1,13 +1,10 @@
-# 아이디어: 오름차순으로 정렬하여 계산하면 최솟값을 구할 수 있지 않을까
-c = int(input())
-num_list = list(map(int, input().split()))
+person = int(input())
+time_list = list(map(int, input().split()))
 
-l = sorted(num_list)
+time_list.sort()
 
-sum = 0
-m = 0  # 누적합
-for num in l:
-    m += num
-    sum += m
-
-print(sum)
+time_count = 0
+for i in range(len(time_list)):
+    time_count += sum(time_list[:i+1])
+    
+print(time_count)
