@@ -1,17 +1,11 @@
-i = int(input())
-m = 1000 - i
-c = 0
+a = int(input())
+coin_list = [500, 100, 50, 10, 5, 1]
 
-c += m // 500
-m %= 500
-c += m // 100
-m %= 100
-c += m // 50
-m %= 50
-c += m // 10
-m %= 10
-c += m // 5
-m %= 5
-c += m // 1
-
-print(c)
+money = 1000 - a
+count = 0
+for coin in coin_list:
+    if coin <= money:
+        count += money // coin
+        money %= coin
+        
+print(count)
