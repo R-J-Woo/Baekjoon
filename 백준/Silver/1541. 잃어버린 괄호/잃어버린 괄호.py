@@ -1,33 +1,30 @@
-# 아이디어: +를 먼저 처리하고 -를 그 후에 처리하면, +로 커진 수들로 -를 하게 되어서 최솟값이 나올 것이다
-import re
+strA = input()
+strList = []
 
-S = input()  # 문자열로 입력받음
-operator = []
-for s in S:
-    if s == '+' or s == '-':  # '+', '-'를 나온 순서대로 리스트에 저장
-        operator.append(s)
-    else:
+# 00009같이 이상한 데이터를 대비하여 데이터 전처리 진행
+lastSymbol = 0
+for i in range(len(strA)):
+    if strA[i] in ('+', '-'):
+        strList.append(int(strA[lastSymbol:i]))
+        strList.append(strA[i])
+        lastSymbol = i + 1
         continue
+        
+    if i == len(strA) - 1:
+        strList.append(int(strA[lastSymbol:]))
 
-operand = re.split("[+-]", S)  # 숫자를 저장하기 위해 '+'와 '-'를 구분
-operand = [ele.lstrip('0') for ele in operand]
-operand = list(map(int, operand))  # 문자열을 숫자로 변환
+strList2 = []
+for a in strList:
+    strList2.append(a)
+    if strList2[len(strList2) - 2] == '+': # 예를 들어 [9, '+', 4]의 상황이라면
+        n1 = strList2.pop()
+        strList2.pop()
+        n2 = strList2.pop()
+        strList2.append(n1+n2)
 
-while operator:  # operator가 빌 때까지
-    if '+' in operator:  # '+'가 있으면
-        i = operator.index('+')  # '+'의 위치를 찾기
-        num = operand[i] + operand[i+1]  # 더한 값을 다시 저장
-        del operand[i:i+2]
-        operand.insert(i, num)
-        del operator[i]
-    else:  # '+'가 더 이상 존재하지 않으면
-        break
-
-if '-' in operator:  # '-'가 있으면
-    count = 0
-    for o in operand:
-        count -= o
-    count += 2 * operand[0]
-else:
-    count = operand[0]
-print(count)
+answer = strList2[0]
+for i in range(1, len(strList2)):
+    if strList2[i] != '-':
+        answer -= strList2[i]
+        
+print(answer)
