@@ -1,11 +1,11 @@
-a = int(input())
-coin_list = [500, 100, 50, 10, 5, 1]
-
-money = 1000 - a
+money = int(input())
+remain = 1000 - money
 count = 0
-for coin in coin_list:
-    if coin <= money:
-        count += money // coin
-        money %= coin
-        
+
+money_list = [500, 100, 50, 10, 5, 1]
+
+for m in money_list:
+    count += remain // m
+    remain %= m
+    
 print(count)
