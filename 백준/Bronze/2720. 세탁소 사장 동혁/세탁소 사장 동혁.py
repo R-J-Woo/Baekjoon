@@ -1,14 +1,17 @@
-i = int(input())
+money_list = [25, 10, 5, 1]
 
-for _ in range(i):
-    m = int(input())
+iter = input()
+iter = int(iter)
 
-    a = m // 25
-    m %= 25
-    b = m // 10
-    m %= 10
-    c = m // 5
-    m %= 5
-    d = m // 1
-
-    print(a, b, c, d)
+for i in range(iter):
+    count_list = ""
+    money = input()
+    money = int(money)
+    
+    for m in money_list:
+        n = money // m
+        money %= m
+        
+        count_list += str(n) + ' '
+    
+    print(count_list)
