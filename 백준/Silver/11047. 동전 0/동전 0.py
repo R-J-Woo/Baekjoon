@@ -1,20 +1,19 @@
-n, k = input().split()
-n = int(n)
-k = int(k)
-l1 = []
-c = 0
-while c < n:  # 동전의 가치 입력
-    a = int(input())
-    l1.append(a)
-    c += 1
+iter, total = map(int, input().split())
+iter = int(iter)
+total = int(total)
 
-l2 = []
-for num in l1:  # k보다 작은 가치를 가진 동전만 담기
-    if num <= k:
-        l2.append(num)
+num_list = []
+
+for i in range(iter): # 입력받은 수 만큼 반복하면서 돈을 입력받음
+    num = input()
+    num_list.append(int(num)) # 입력받은 동전 단위를 리스트에 추가
+
+num_list.sort(reverse=True) # 동전 단위를 내림차순으로 정렬
+
 count = 0
-for i in range(len(l2)):
-    count += k // l2[(-1)*i-1]
-    k %= l2[(-1)*i-1]
+
+for num in num_list:
+    count += total // num
+    total %= num
 
 print(count)
