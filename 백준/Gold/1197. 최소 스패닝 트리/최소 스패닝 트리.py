@@ -1,6 +1,6 @@
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10**6)
+sys.setrecursionlimit(10**6) # recursion error 발생 -> 재귀 깊이 제한 증가
 
 # 특정 원소의 루트 노드 찾기
 def find_parent(parent, x):
