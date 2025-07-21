@@ -8,8 +8,8 @@ input = sys.stdin.readline
 
 def dfs(graph, start, visited):
     # 몇 번째 방문인지 저장
-    global count
-    count += 1
+    global count # 파이선에서 정수는 immutable이라 함수 호출 시 값 복사가 이뤄짐 -> count += 1이 반영되지 않음
+    count += 1 # 그래서 count를 전역 변수로 사용
     visited[start] = count
 
     for v in graph[start]:
