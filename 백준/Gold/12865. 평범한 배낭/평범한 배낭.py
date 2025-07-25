@@ -1,3 +1,5 @@
+# 아이디어: 다이나믹 프로그래밍 이용
+
 n, k = map(int, input().split())
 wv = []
 for _ in range(n):
@@ -11,6 +13,7 @@ for i in range(n):
     for j in range(k, wv[i][0] - 1, -1):
         if j == wv[i][0]:
             k_list[j] = wv[i][1]
+        # 만들 수 있는 무게의 경우 가치의 최댓값 비교
         elif k_list[j - wv[i][0]] != 0:
             k_list[j] = max(k_list[j], k_list[j - wv[i][0]] + wv[i][1])
 
