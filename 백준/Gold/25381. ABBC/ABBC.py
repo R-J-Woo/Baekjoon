@@ -1,33 +1,35 @@
-# 아이디어: B&C를 먼저 시행하고, 그 후 A&B를 시행한다
+# 아이디어: 큐를 이용
+# B를 최대한 많이 지워야 한다
+# 거능한 B와 C의 조합은 앞 순서의 B부터 매칭한다 -> FIFO(큐)
 
 from collections import deque
+import sys
+input = sys.stdin.readline
 
-s = input()
-queue = deque()
-c_count = 0
-result = 0
-# BC를 먼저 시행 -> 역으로 순회하면서 큐에 삽입
-for i in range(len(s) - 1, -1, -1):
-    alpha = s[i]
-    if alpha == 'C':
-        c_count += 1
-    # B 뒤에 C가 있다면 삭제 -> 큐에 넣지 않음
-    elif alpha == 'B' and c_count > 0:
-        c_count -= 1
-        result += 1
-    else:
-        queue.appendleft(alpha)
-        
-# AB를 그 후 시행
-length = len(queue)
+s = input().strip()
+n = len(s)
+removed = [False] * n
+answer = 0
+que = deque()
+
+# BC 조합 먼저
+for i, ch in enumerate(s):
+    if ch == 'B':
+        que.append(i)
+    elif ch == 'C' and que:
+        b_idx = que.popleft()
+        removed[b_idx] = True
+        answer += 1
+
+# AB 조합
 a_count = 0
-for _ in range(length):
-    alpha = queue.popleft()
-    if alpha == 'A':
+for i, ch in enumerate(s):
+    if removed[i]:
+        continue
+    if ch == 'A':
         a_count += 1
-    # B 전에 A가 나온 적이 있다면 삭제
-    elif alpha == 'B' and a_count > 0:
+    elif ch == 'B' and a_count:
         a_count -= 1
-        result += 1
+        answer += 1
 
-print(result)
+print(answer)
