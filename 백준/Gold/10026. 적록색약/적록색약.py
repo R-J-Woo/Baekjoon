@@ -1,3 +1,5 @@
+# 아이디어: 깊이 우선 탐색 (DFS) 알고리즘 사용
+
 import sys
 sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
