@@ -41,6 +41,7 @@ def bfs():
                 and box[z][nx][ny] == 0 and result[z][nx][ny] == 10001:
                 box[z][nx][ny] = 1
                 queue.append((z, nx, ny))
+                # 이전 일수에서 1일 추가
                 result[z][nx][ny] = result[z][x][y] + 1
         # 상하
         for i in range(2):
@@ -48,6 +49,7 @@ def bfs():
             if 0 <= nz < h and box[nz][x][y] == 0 and result[nz][x][y] == 10001:
                 box[nz][x][y] = 1
                 queue.append((nz, x, y))
+                # 이전 일수에서 1일 추가
                 result[nz][x][y] = result[z][x][y] + 1
 
     return result
