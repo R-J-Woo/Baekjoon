@@ -9,11 +9,12 @@ for _ in range(n):
 
 for i in range(len(schedule)):
     t, p = schedule[i]
+    # 상담을 할 수 없다면 패스
     if i + t >= len(result):
         continue
 
-    # 이전 현재까지의 최대 이익과, 
+    # i번째 날까지 고려했을 때 얻을 수 있는 최대 이익 비교 후 갱신
     for j in range(i + t, n + 1):
-        result[j] = max(result[j], p + result[i])
+        result[j] = max(result[j], p + result[i]) # 이전까지의 최대 이익 방식과 현재 비교
 
 print(result[n])
