@@ -33,6 +33,7 @@ for _ in range(M):
     graph[a].append(b)
     graph[b].append(a)
 
+# 낮은 정점 순으로 정렬
 for i in range(1, N + 1):
     graph[i].sort()
     
