@@ -14,6 +14,7 @@ for i in range(len(string)):
         brackets.append([left, right])
 
 # 1~괄호 짝의 개수까지 조합하면서, 출력에서 제외할 괄호의 인덱스 짝을 구함
+# 중복 제거를 위해 집합을 사용
 total_result = set()
 for count in range(1, len(brackets) + 1):
     for c in combinations(brackets, count):
