@@ -1,36 +1,27 @@
 N = int(input())
 
-black = []
-white = []
+color = {}
 for _ in range(N):
     x, y = map(int, input().split())
 
-    if y == 1:
-        white.append(x)
+    if y in color:
+        color[y].append(x)
     else:
-        black.append(x)
-
-
-black.sort()
-white.sort()
+        color[y] = [x]
 
 result = 0
-for i in range(len(black)):
-    if i == 0:
-        result += abs(black[i+1] - black[i])
-    elif i == len(black) - 1:
-        result += abs(black[i] - black[i-1])
-    else:
-        value = min(black[i+1] - black[i], black[i] - black[i-1])
-        result += value
+for key in color:
+    arr = color[key]
+    arr.sort()
 
-for i in range(len(white)):
-    if i == 0:
-        result += abs(white[i+1] - white[i])
-    elif i == len(white) - 1:
-        result += abs(white[i] - white[i-1])
-    else:
-        value = min(white[i+1] - white[i], white[i] - white[i-1])
-        result += value
+    for i in range(len(arr)):
+        if i == 0:
+            result += abs(arr[i+1] - arr[i])
+        elif i == len(arr) - 1:
+            result += abs(arr[i] - arr[i-1])
+        else:
+            value = min(arr[i+1] - arr[i], arr[i] - arr[i-1])
+            result += value
+    
 
 print(result)
