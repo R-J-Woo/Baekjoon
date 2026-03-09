@@ -1,3 +1,5 @@
+# 아이디어: 깊이우선탐색(dfs) 알고리즘 사용
+
 import sys
 input = sys.stdin.readline
 
