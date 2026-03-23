@@ -1,12 +1,12 @@
-from itertools import combinations_with_replacement
+N = int(input())
 
-count = int(input())
+result = set()
+for num1 in range(N + 1):
+    for num2 in range(N + 1):
+        for num3 in range(N + 1):
+            for num4 in range(N + 1):
+                if num1 + num2 + num3 + num4 == N:
+                    total = num1 + 5 * num2 + 10 * num3 + 50 * num4
+                    result.add(total)
 
-nums = [1, 5, 10, 50]
-num_list = []
-for com in combinations_with_replacement(nums, count):
-    total_num = sum(com)
-    if total_num not in num_list:
-        num_list.append(total_num)
-
-print(len(num_list))
+print(len(result))
