@@ -1,30 +1,28 @@
-# 아이디어: 우선순위 큐 알고리즘 이용
-
 import heapq
-import sys
-input = sys.stdin.readline
 
-n, h, t = map(int, input().split())
-titan = []
-for _ in range(n):
+N, H, T = map(int, input().split())
+
+big_guy = []
+for _ in range(N):
     height = int(input())
-    heapq.heappush(titan, -height) # 내림차순을 위해 -을 붙여서 삽입
+    heapq.heappush(big_guy, -height)
 
-count = 0 # 뿅망치 사용 횟수
-for _ in range(t):
-    p = -heapq.heappop(titan)
-    if p < h:
-        heapq.heappush(titan, -p)
+count = 0
+for i in range(T):
+    max_height = -heapq.heappop(big_guy)
+
+    if max_height < H or max_height == 1:
+        heapq.heappush(big_guy, -max_height)
         break
-    count += 1
-    if p > 1:
-        p //= 2
-    heapq.heappush(titan, -p)
 
-max_height = -heapq.heappop(titan)
-if max_height < h:
+    count += 1
+    max_height = max_height // 2
+    heapq.heappush(big_guy, -max_height)
+
+
+if -min(big_guy) >= H:
+    print("NO")
+    print(-min(big_guy))
+else:
     print("YES")
     print(count)
-else:
-    print("NO")
-    print(max_height)
