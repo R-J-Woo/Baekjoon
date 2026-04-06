@@ -1,41 +1,39 @@
-import heapq
+from collections import deque
 import sys
 input = sys.stdin.readline
 
-# 다익스트라 알고리즘
-def dijkstra(start):
-    q = []
-    heapq.heappush(q, (0, start))
-    distance[start] = 0
-    while q:
-        dist, now = heapq.heappop(q)
-        if distance[now] < dist:
-            continue
+def bfs(graph, start, visited):
+    queue = deque()
+    queue.append(start)
+    visited[start] = 0  # 시작 노드 거리 0
 
-        for i in graph[now]:
-            cost = dist + i[1]
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+    while queue:
+        node = queue.popleft()
+        for nxt in graph[node]:
+            if visited[nxt] == -1:  # 방문 안 한 경우
+                visited[nxt] = visited[node] + 1
+                queue.append(nxt)
 
 
 N, M, K, X = map(int, input().split())
 
-INF = int(1e9)
-visited = [False] * (N + 1)
-distance = [INF] * (N + 1)
 graph = [[] for _ in range(N + 1)]
+
 for _ in range(M):
     A, B = map(int, input().split())
-    graph[A].append((B, 1))
+    graph[A].append(B)
 
-dijkstra(X)
+visited = [-1] * (N + 1)
 
-count = 0
+bfs(graph, X, visited)
+
+result = []
 for i in range(1, N + 1):
-    if distance[i] == K:
-        count += 1
-        print(i)
+    if visited[i] == K:
+        result.append(i)
 
-if count == 0:
+if not result:
     print(-1)
+else:
+    for r in result:
+        print(r)
