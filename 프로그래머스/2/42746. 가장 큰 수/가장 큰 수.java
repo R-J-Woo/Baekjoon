@@ -2,7 +2,7 @@ import java.util.*;
 
 class Solution {
     public String solution(int[] numbers) {
-        // 1. 문자열로 변환
+        // 1. 숫자를 문자열로 변환
         String[] arr = new String[numbers.length];
         for (int i = 0; i < numbers.length; i++) {
             arr[i] = String.valueOf(numbers[i]);
