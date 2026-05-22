@@ -2,26 +2,27 @@ import heapq
 
 def solution(scoville, K):
     
-    # 스코빌이 낮은 순서대로 삽입
-    heap = []
+    # 매운 음식을 낮은 순서부터 빼기 위해 우선순위큐에 삽입
+    spicy = []
     for s in scoville:
-        heapq.heappush(heap, s)
+        heapq.heappush(spicy, s)
         
-    answer = 0
-    while len(heap) > 1:
-        # 가장 낮은 음식의 스코빌 지수가 K를 넘는다면 종료
-        h1 = heapq.heappop(heap)
-        if h1 >= K:
-            return answer
+    answer = 0 # 섞는 횟수
+    while True:
+        s1 = heapq.heappop(spicy)
+        
+        # 모든 음식의 스코빌 지수가 K 이상인 경우
+        if s1 >= K:
+            break
             
-        h2 = heapq.heappop(heap)
+        # 모든 음식의 스코빌 지수를 K 이상으로 만들 수 없는 경우
+        if len(spicy) == 0:
+            answer = -1
+            break
             
-        new_h = h1 + (h2 * 2)
-        heapq.heappush(heap, new_h)
+        s2 = heapq.heappop(spicy)
+        new_scoville = s1 + s2 * 2
+        heapq.heappush(spicy, new_scoville)
         answer += 1
-        
-    # 마지막 하나 남았을 때
-    if heap[0] >= K:
-        return answer
-    else:
-        return -1
+    
+    return answer
